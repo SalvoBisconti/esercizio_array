@@ -1,15 +1,16 @@
 const array = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
 
-const toNumber2 = (firstNumb, secondNumb) => {
+const summArrayElement = (firstNumb, secondNumb) => {
   let firstPosition;
   let secondPosition;
+  let summ;
 
   if (firstNumb > 0 && secondNumb > 0) {
     if (firstNumb < array[9] || secondNumb < array[9]) {
       if (firstNumb < secondNumb) {
         if (array.includes(firstNumb) && secondNumb > 100) {
           firstPosition = array.indexOf(Math.round(firstNumb / 10) * 10);
-          const summ = array
+          summ = array
             .slice(firstPosition, 10)
             .reduce(
               (previousValue, currentValue) => previousValue + currentValue,
@@ -27,11 +28,14 @@ const toNumber2 = (firstNumb, secondNumb) => {
             ? Math.round(secondNumb / 10) * 10
             : Math.floor(secondNumb / 10) * 10
         );
-        const summ =
-          firstPosition == -1
+        summ =
+          firstPosition == -1 && secondPosition == -1
             ? array[0]
             : array
-                .slice(firstPosition, secondPosition + 1)
+                .slice(
+                  firstPosition != -1 ? firstPosition : firstPosition + 1,
+                  secondPosition + 1
+                )
                 .reduce(
                   (previousValue, currentValue) => previousValue + currentValue,
                   0
@@ -42,12 +46,3 @@ const toNumber2 = (firstNumb, secondNumb) => {
     } else return 0;
   } else return -1;
 };
-
-console.log(toNumber2(-2, -10));
-console.log(toNumber2(-2, 10));
-console.log(toNumber2(90, 20));
-console.log(toNumber2(3, 10));
-console.log(toNumber2(91, 99));
-console.log(toNumber2(90, 120));
-console.log(toNumber2(70, 150));
-console.log(toNumber2(120, 150));
